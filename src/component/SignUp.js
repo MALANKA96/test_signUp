@@ -22,7 +22,7 @@ const validate = (values, touched) => {
     errors.email = "Invalid email address";
   }
   if (!values.pass) {
-    errors.pass = "enter password";
+    errors.pass = "сreate a password";
   } else if (values.pass.length < 8) {
     errors.pass = "minimum number of characters 8";
   }
@@ -30,7 +30,7 @@ const validate = (values, touched) => {
     errors.c_pass = "password confirmation doesn't match";
   }
   if (!values.c_pass) {
-    errors.c_pass = "enter password";
+    errors.c_pass = "enter confirm password";
   } else if (values.c_pass.length < 1) {
     errors.c_pass = "password confirmation doesn't match";
   }
