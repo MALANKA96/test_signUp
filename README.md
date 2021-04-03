@@ -3,7 +3,7 @@ Sign up form should have 4 input fields with validation
 (login, email, password, confirm password) 
 and one submit button, when clicked, which outputs data from the form to the console.
 
-### The solution used the following tasks:
+### When solving the task, the following tools were used:
 - react.js
 - redux-form
 - material-ui
@@ -14,8 +14,9 @@ and one submit button, when clicked, which outputs data from the form to the con
 - npm install
 - npm start
 
-### https://malanka96.github.io/test_signUp/
-deploy gh-pages
+### Link deploy gh-pages
+https://malanka96.github.io/test_signUp/
+
 
 
 
