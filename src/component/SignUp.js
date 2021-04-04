@@ -27,8 +27,6 @@ const validate = (values) => {
   if (!values.email) {
     errors.email =
       "enter a valid email address to which a confirmation email will be sent";
-  } else if (/\s/.test(values.email)) {
-    errors.email = "don't use space";
   } else if (
     !/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
       values.email
@@ -40,9 +38,7 @@ const validate = (values) => {
     errors.pass = "сreate a password";
   } else if (/\s/.test(values.pass)) {
     errors.pass = "don't use space";
-  } else if (/(?=.*[а-я])/.test(values.pass)) {
-    errors.pass = "do not use letters ая, АЯ";
-  } else if (/(?=.*[А-Я])/.test(values.pass)) {
+  } else if (/(?=.*[А-я])/.test(values.pass)) {
     errors.pass = "do not use letters ая, АЯ";
   } else if (values.pass.length < 8) {
     errors.pass = "password is short, minimum number of characters 8";
@@ -114,6 +110,7 @@ const SignUpForm = ({ handleSubmit }) => {
   const StrongePass = (e) => {
     setVisibilityStrongPass(true);
     let array = e.target.value.split("");
+
     let isArray1 = array.some((i) => {
       return valid1.test(i);
     });
@@ -126,25 +123,10 @@ const SignUpForm = ({ handleSubmit }) => {
     let isArray4 = array.some((i) => {
       return valid4.test(i);
     });
-    if (isArray1 && isArray2 && isArray3 && isArray4) setScoreStrongPass(4);
-    if (!isArray1 && !isArray2 && !isArray3 && !isArray4) setScoreStrongPass(0);
 
-    if (!isArray1 && isArray2 && isArray3 && isArray4) setScoreStrongPass(3);
-    if (isArray1 && !isArray2 && isArray3 && isArray4) setScoreStrongPass(3);
-    if (isArray1 && isArray2 && !isArray3 && isArray4) setScoreStrongPass(3);
-    if (isArray1 && isArray2 && isArray3 && !isArray4) setScoreStrongPass(3);
-
-    if (!isArray1 && !isArray2 && isArray3 && isArray4) setScoreStrongPass(2);
-    if (!isArray1 && isArray2 && !isArray3 && isArray4) setScoreStrongPass(2);
-    if (!isArray1 && isArray2 && isArray3 && !isArray4) setScoreStrongPass(2);
-    if (isArray1 && !isArray2 && !isArray3 && isArray4) setScoreStrongPass(2);
-    if (isArray1 && !isArray2 && isArray3 && !isArray4) setScoreStrongPass(2);
-    if (isArray1 && isArray2 && !isArray3 && !isArray4) setScoreStrongPass(2);
-
-    if (!isArray1 && !isArray2 && !isArray3 && isArray4) setScoreStrongPass(1);
-    if (!isArray1 && !isArray2 && isArray3 && !isArray4) setScoreStrongPass(1);
-    if (!isArray1 && isArray2 && !isArray3 && !isArray4) setScoreStrongPass(1);
-    if (isArray1 && !isArray2 && !isArray3 && !isArray4) setScoreStrongPass(1);
+    setScoreStrongPass(
+      [isArray1, isArray2, isArray3, isArray4].filter(Boolean).length
+    );
 
     if (e.target.value === "") {
       setScoreStrongPass(0);
