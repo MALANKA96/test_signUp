@@ -8,23 +8,48 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { Field, reduxForm } from "redux-form";
+import VisibilityIcon from "@material-ui/icons/Visibility";
+import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
+import PassStrong from "./PassStrong";
 
-const validate = (values, touched) => {
+const validate = (values) => {
   const errors = {};
-  if (!values.login && touched) {
+  if (!values.login) {
     errors.login = "create a login";
+  } else if (values.login.length < 4) {
+    errors.login = "login must be more than 4 characters";
   } else if (values.login.length > 15) {
-    errors.login = "must be 15 characters or less";
+    errors.login = "login must be 15 characters or less";
+  } else if (!/^[\w]{4,}$/i.test(values.login)) {
+    errors.login =
+      "login should not contain spaces and other special characters. use: az, AZ, 0-9";
   }
   if (!values.email) {
-    errors.email = "enter a valid email";
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = "Invalid email address";
+    errors.email =
+      "enter a valid email address to which a confirmation email will be sent";
+  } else if (/\s/.test(values.email)) {
+    errors.email = "don't use space";
+  } else if (
+    !/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+      values.email
+    )
+  ) {
+    errors.email = "invalid email address";
   }
   if (!values.pass) {
     errors.pass = "сreate a password";
+  } else if (/\s/.test(values.pass)) {
+    errors.pass = "don't use space";
   } else if (values.pass.length < 8) {
-    errors.pass = "minimum number of characters 8";
+    errors.pass = "password is short, minimum number of characters 8";
+  } else if (!/(?=.*[A-Z])/.test(values.pass)) {
+    errors.pass = "at least one uppercase is required";
+  } else if (!/(?=.*[a-z])/.test(values.pass)) {
+    errors.pass = "at least one lower case is required";
+  } else if (!/(?=.*[!@#$%^&*()_=+{}:<.>-])/.test(values.pass)) {
+    errors.pass = "at least one special character is required";
+  } else if (!/(?=.*[0-9])/.test(values.pass)) {
+    errors.pass = "at least one number is required";
   }
   if (values.c_pass && values.c_pass !== values.pass) {
     errors.c_pass = "password confirmation doesn't match";
@@ -51,9 +76,87 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  buttonPass: {
+    height: "56px",
+    margin: "0",
+    minWidth: "42px",
+    padding: "0",
+    width: "100%",
+  },
+  weak: {
+    textAlign: "center",
+  },
+  strog: {
+    textAlign: "center",
+  },
+  strongPass: {
+    display: "flex",
+  },
 }));
 
 const SignUpForm = ({ handleSubmit }) => {
+  const [typeFieldPass, setTypeFieldPass] = React.useState("password");
+  const [visibilityPass, setVisibilityPass] = React.useState(false);
+  const [visibilityStrongPass, setVisibilityStrongPass] = React.useState(false);
+
+  let [scoreStrongPass, setScoreStrongPass] = React.useState(0);
+
+  const valid1 = /(?=.*[a-z])/;
+  const valid2 = /(?=.*[A-Z])/;
+  const valid3 = /(?=.*[!@#$%^&*()_=+{}:<.>-])/;
+  const valid4 = /(?=.*[0-9])/;
+
+  const StrongePass = (e) => {
+    setVisibilityStrongPass(true);
+    let array = e.target.value.split("");
+    let isArray1 = array.some((i) => {
+      return valid1.test(i);
+    });
+    let isArray2 = array.some((i) => {
+      return valid2.test(i);
+    });
+    let isArray3 = array.some((i) => {
+      return valid3.test(i);
+    });
+    let isArray4 = array.some((i) => {
+      return valid4.test(i);
+    });
+    if (isArray1 && isArray2 && isArray3 && isArray4) setScoreStrongPass(4);
+    if (!isArray1 && !isArray2 && !isArray3 && !isArray4) setScoreStrongPass(0);
+
+    if (!isArray1 && isArray2 && isArray3 && isArray4) setScoreStrongPass(3);
+    if (isArray1 && !isArray2 && isArray3 && isArray4) setScoreStrongPass(3);
+    if (isArray1 && isArray2 && !isArray3 && isArray4) setScoreStrongPass(3);
+    if (isArray1 && isArray2 && isArray3 && !isArray4) setScoreStrongPass(3);
+
+    if (!isArray1 && !isArray2 && isArray3 && isArray4) setScoreStrongPass(2);
+    if (!isArray1 && isArray2 && !isArray3 && isArray4) setScoreStrongPass(2);
+    if (!isArray1 && isArray2 && isArray3 && !isArray4) setScoreStrongPass(2);
+    if (isArray1 && !isArray2 && !isArray3 && isArray4) setScoreStrongPass(2);
+    if (isArray1 && !isArray2 && isArray3 && !isArray4) setScoreStrongPass(2);
+    if (isArray1 && isArray2 && !isArray3 && !isArray4) setScoreStrongPass(2);
+
+    if (!isArray1 && !isArray2 && !isArray3 && isArray4) setScoreStrongPass(1);
+    if (!isArray1 && !isArray2 && isArray3 && !isArray4) setScoreStrongPass(1);
+    if (!isArray1 && isArray2 && !isArray3 && !isArray4) setScoreStrongPass(1);
+    if (isArray1 && !isArray2 && !isArray3 && !isArray4) setScoreStrongPass(1);
+
+    if (e.target.value === "") {
+      setScoreStrongPass(0);
+      setVisibilityStrongPass(false);
+    }
+  };
+
+  const VisibilityPass = () => {
+    if (typeFieldPass === "password") {
+      setTypeFieldPass("text");
+      setVisibilityPass(true);
+    } else {
+      setTypeFieldPass("password");
+      setVisibilityPass(false);
+    }
+  };
+
   const classes = useStyles();
 
   return (
@@ -64,7 +167,7 @@ const SignUpForm = ({ handleSubmit }) => {
           Sign up
         </Typography>
         <form className={classes.form} noValidate onSubmit={handleSubmit}>
-          <Grid container spacing={2}>
+          <Grid container spacing={1}>
             <Grid item xs={12}>
               <Field
                 placeholder={"login"}
@@ -87,17 +190,44 @@ const SignUpForm = ({ handleSubmit }) => {
               />
             </Grid>
 
-            <Grid item xs={12}>
+            <Grid item xs={10} sm={10}>
               <Field
                 placeholder={"password"}
                 name={"pass"}
                 id={"password"}
                 label={"password"}
                 component={InputTextField}
-                type={"password"}
+                type={typeFieldPass}
                 title={"enter a strong password"}
+                onChange={StrongePass}
               />
             </Grid>
+            <Grid item xs={2} sm={2}>
+              <Button
+                type="button"
+                variant="contained"
+                color="primary"
+                className={classes.buttonPass}
+                onClick={VisibilityPass}
+              >
+                {visibilityPass && <VisibilityIcon />}
+                {!visibilityPass && <VisibilityOffIcon />}
+              </Button>
+            </Grid>
+            {visibilityStrongPass && (
+              <Grid item xs={12} className={classes.strongPass}>
+                <Grid item xs={2} className={classes.weak}>
+                  weak
+                </Grid>
+                <Grid item xs={8}>
+                  <PassStrong scoreStrongPass={scoreStrongPass} />
+                </Grid>
+                <Grid item xs={2} className={classes.strong}>
+                  strong
+                </Grid>
+              </Grid>
+            )}
+
             <Grid item xs={12}>
               <Field
                 placeholder={"confirm password"}
@@ -105,7 +235,7 @@ const SignUpForm = ({ handleSubmit }) => {
                 id={"c_pass"}
                 label={"confirm password"}
                 component={InputTextField}
-                type={"password"}
+                type={typeFieldPass}
                 title={"confirm password"}
               />
             </Grid>
