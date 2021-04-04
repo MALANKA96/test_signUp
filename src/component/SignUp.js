@@ -40,6 +40,10 @@ const validate = (values) => {
     errors.pass = "сreate a password";
   } else if (/\s/.test(values.pass)) {
     errors.pass = "don't use space";
+  } else if (/(?=.*[а-я])/.test(values.pass)) {
+    errors.pass = "do not use letters ая, АЯ";
+  } else if (/(?=.*[А-Я])/.test(values.pass)) {
+    errors.pass = "do not use letters ая, АЯ";
   } else if (values.pass.length < 8) {
     errors.pass = "password is short, minimum number of characters 8";
   } else if (!/(?=.*[A-Z])/.test(values.pass)) {
@@ -47,7 +51,8 @@ const validate = (values) => {
   } else if (!/(?=.*[a-z])/.test(values.pass)) {
     errors.pass = "at least one lower case is required";
   } else if (!/(?=.*[!@#$%^&*()_=+{}:<.>-])/.test(values.pass)) {
-    errors.pass = "at least one special character is required";
+    errors.pass =
+      "at least one special character is required ! @ # $ % ^ & * ( ) _ = + { } : < . > -";
   } else if (!/(?=.*[0-9])/.test(values.pass)) {
     errors.pass = "at least one number is required";
   }
@@ -86,7 +91,7 @@ const useStyles = makeStyles((theme) => ({
   weak: {
     textAlign: "center",
   },
-  strog: {
+  strong: {
     textAlign: "center",
   },
   strongPass: {
