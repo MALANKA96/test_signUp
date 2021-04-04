@@ -1,8 +1,8 @@
 import React from "react";
 
 const PassStrong = ({ scoreStrongPass }) => {
-  var strColor;
-  var strWidth;
+  let strColor;
+  let strWidth;
 
   switch (scoreStrongPass) {
     case 1:
@@ -21,11 +21,10 @@ const PassStrong = ({ scoreStrongPass }) => {
       strColor = "#5cff47";
       strWidth = "100%";
       break;
-
     default:
   }
 
-  var style = {
+  let style = {
     backgroundColor: strColor,
     height: "5px",
     marginTop: "10px",
