@@ -1,20 +1,20 @@
 {
   "files": {
     "main.css": "/test_signUp/static/css/main.2ae47eeb.chunk.css",
-    "main.js": "/test_signUp/static/js/main.8033f405.chunk.js",
-    "main.js.map": "/test_signUp/static/js/main.8033f405.chunk.js.map",
+    "main.js": "/test_signUp/static/js/main.379e557d.chunk.js",
+    "main.js.map": "/test_signUp/static/js/main.379e557d.chunk.js.map",
     "runtime-main.js": "/test_signUp/static/js/runtime-main.36a2a074.js",
     "runtime-main.js.map": "/test_signUp/static/js/runtime-main.36a2a074.js.map",
-    "static/js/2.544286f4.chunk.js": "/test_signUp/static/js/2.544286f4.chunk.js",
-    "static/js/2.544286f4.chunk.js.map": "/test_signUp/static/js/2.544286f4.chunk.js.map",
+    "static/js/2.35bdab44.chunk.js": "/test_signUp/static/js/2.35bdab44.chunk.js",
+    "static/js/2.35bdab44.chunk.js.map": "/test_signUp/static/js/2.35bdab44.chunk.js.map",
     "index.html": "/test_signUp/index.html",
     "static/css/main.2ae47eeb.chunk.css.map": "/test_signUp/static/css/main.2ae47eeb.chunk.css.map",
-    "static/js/2.544286f4.chunk.js.LICENSE.txt": "/test_signUp/static/js/2.544286f4.chunk.js.LICENSE.txt"
+    "static/js/2.35bdab44.chunk.js.LICENSE.txt": "/test_signUp/static/js/2.35bdab44.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.36a2a074.js",
-    "static/js/2.544286f4.chunk.js",
+    "static/js/2.35bdab44.chunk.js",
     "static/css/main.2ae47eeb.chunk.css",
-    "static/js/main.8033f405.chunk.js"
+    "static/js/main.379e557d.chunk.js"
   ]
 }
