@@ -11,6 +11,8 @@ import VisibilityIcon from "@material-ui/icons/Visibility";
 import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 
 import InputTextField from "./InputTextField";
+import CheckboxField from "./CheckboxField";
+
 import validate from "../validators/validatorsLogIn";
 import useStyles from "../style/useStyle";
 
@@ -74,6 +76,14 @@ const LogInForm = ({ handleSubmit, ...props }) => {
                 {!visibilityPassword && <VisibilityOffIcon />}
               </Button>
             </Grid>
+            <Field
+              color="primary"
+              name={"remember_me"}
+              id={"remember_me"}
+              label={"Remember me"}
+              component={CheckboxField}
+              type={"checkbox"}
+            />
           </Grid>
           <Button
             type="submit"
@@ -99,16 +109,7 @@ const LogInForm = ({ handleSubmit, ...props }) => {
 
 const LogIn = (props) => {
   const onSubmit = (formData) => {
-    function isEmpty(obj) {
-      for (let key in obj) {
-        return false;
-      }
-      return true;
-    } 
-    if (isEmpty(formData)) {
-      console.log("f")
-    }
-    console.log(formData) ;
+    console.log(formData);
   };
   return (
     <>
@@ -119,7 +120,7 @@ const LogIn = (props) => {
 
 const LogInReduxForm = reduxForm({
   form: "singIp",
-  validate
+  validate,
 })(LogInForm);
 
 export default LogIn;
