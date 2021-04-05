@@ -12,10 +12,10 @@ import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
 
 import PasswordСomplexity from "./PasswordСomplexity";
 import InputTextField from "./InputTextField";
-import validate from "../validators/validators";
+import validate from "../validators/validatorsSignUp";
 import useStyles from "../style/useStyle";
 
-const SignUpForm = ({ handleSubmit }) => {
+const SignUpForm = ({ handleSubmit, ...props }) => {
   const [typeFieldPassword, setTypeFieldPassword] = React.useState("password");
   const [visibilityPassword, setVisibilityPassword] = React.useState(false);
   const [
@@ -125,15 +125,15 @@ const SignUpForm = ({ handleSubmit }) => {
             </Grid>
             {visibilityСomplexityPassword && (
               <Grid item xs={12} className={classes.complexityPassword}>
-                <Grid item xs={2} className={classes.weak}>
+                <Grid item xs={3} className={classes.weak}>
                   weak
                 </Grid>
-                <Grid item xs={8}>
+                <Grid item xs={6}>
                   <PasswordСomplexity
                     scoreСomplexityPassword={scoreСomplexityPassword}
                   />
                 </Grid>
-                <Grid item xs={2} className={classes.strong}>
+                <Grid item xs={3} className={classes.strong}>
                   strong
                 </Grid>
               </Grid>
@@ -162,8 +162,8 @@ const SignUpForm = ({ handleSubmit }) => {
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link href="#" variant="body2">
-                Already have an account? Sign in
+              <Link onClick={props.props.handleClickOpenLogIn} variant="body2">
+                Already have an account? Log in
               </Link>
             </Grid>
           </Grid>
@@ -173,13 +173,13 @@ const SignUpForm = ({ handleSubmit }) => {
   );
 };
 
-const SignUp = () => {
+const SignUp = (props) => {
   const onSubmit = (formData) => {
     console.log(formData);
   };
   return (
     <>
-      <SignUpReduxForm onSubmit={onSubmit} />
+      <SignUpReduxForm onSubmit={onSubmit} props={props}/>
     </>
   );
 };

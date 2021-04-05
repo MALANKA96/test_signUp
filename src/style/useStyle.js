@@ -11,13 +11,26 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     marginTop: theme.spacing(3),
   },
+  buttonsLog: {
+    width: "100%",
+    marginTop: theme.spacing(10),
+    margin: "0 auto",
+  }, 
+  buttonLogIn: {
+    width: "100%",
+   /*  marginRigth: theme.spacing(3), */
+  }, 
+  buttonSignUp: {
+    width: "100%",
+   marginTop: theme.spacing(3),
+  },
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
   buttonPass: {
     height: "56px",
     margin: "0",
-    minWidth: "42px",
+    minWidth: "30px",
     padding: "0",
     width: "100%",
   },
