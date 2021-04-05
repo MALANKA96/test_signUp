@@ -1,6 +1,7 @@
-import { Checkbox, TextField, FormControlLabel } from "@material-ui/core";
+import {TextField} from "@material-ui/core";
 
 const InputTextField = ({ input, meta, ...props }) => {
+  //a component that returns an input field
   const hasError = meta.touched && meta.error;
   return (
     <TextField

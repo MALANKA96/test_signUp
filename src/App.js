@@ -12,8 +12,9 @@ import Dialog from "@material-ui/core/Dialog";
 
 const App = () => {
   const [openSignUp, setOpenSignUp] = React.useState(false);
+  //hook state opening Dialog Sign up
   const [openLogIn, setOpenLogIn] = React.useState(false);
-
+  //hook state opening Dialog Log in
   const handleClickOpenSignUp = () => {
     setOpenLogIn(false);
     setOpenSignUp(true);
@@ -29,6 +30,7 @@ const App = () => {
   };
 
   const classes = useStyles();
+  // hook accepting properties to be used for "interpolation" in the stylesheet.
   return (
     <Provider store={store}>
       <Container component="main" maxWidth="xs">
@@ -51,7 +53,7 @@ const App = () => {
             Sign Up
           </Button>
         </Grid>
-        <SignUnDialog
+        <SignUpDialog
           open={openSignUp}
           onClose={handleClose}
           handleClickOpenLogIn={handleClickOpenLogIn}
@@ -66,7 +68,9 @@ const App = () => {
   );
 };
 
-function SignUnDialog(props) {
+function SignUpDialog(props) {
+  //modal window on the form Sign up
+  
   const { onClose, selectedValue, open } = props;
   const handleClose = () => {
     onClose(selectedValue);
@@ -80,6 +84,7 @@ function SignUnDialog(props) {
 }
 
 function LogInDialog(props) {
+  //modal window on the form Log in
   const { onClose, selectedValue, open } = props;
   const handleClose = () => {
     onClose(selectedValue);

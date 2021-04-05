@@ -17,12 +17,16 @@ import useStyles from "../style/useStyle";
 
 const SignUpForm = ({ handleSubmit, ...props }) => {
   const [typeFieldPassword, setTypeFieldPassword] = React.useState("password");
+  // hook state type setting for password
   const [visibilityPassword, setVisibilityPassword] = React.useState(false);
+  //hook state setting eye visibility for password
   const [
     visibilityСomplexityPassword,
     setVisibilityСomplexityPassword,
   ] = React.useState(false);
+  //hook visibility slider for password сomplexity
   let [scoreСomplexityPassword, setScoreСomplexityPassword] = React.useState(0);
+  //hook state to change points(score) for password complexity
 
   const validationForLowerLetters = /(?=.*[a-z])/;
   const validationForUpperLetters = /(?=.*[A-Z])/;
@@ -30,9 +34,10 @@ const SignUpForm = ({ handleSubmit, ...props }) => {
   const validationForNumber = /(?=.*[0-9])/;
 
   const onPasswordСomplexity = (e) => {
+    //examining the password complexity state
     setVisibilityСomplexityPassword(true);
     let arrayValuePassword = e.target.value.split("");
-
+    //entering the password value into an array for verification
     let isValidForLowerLetters = arrayValuePassword.some((i) => {
       return validationForLowerLetters.test(i);
     });
@@ -47,8 +52,13 @@ const SignUpForm = ({ handleSubmit, ...props }) => {
     });
 
     setScoreСomplexityPassword(
-      [isValidForLowerLetters, isValidForUpperLetters, isValidForSpecialCharacter, isValidForNumber].filter(Boolean).length
-    );
+      [
+        isValidForLowerLetters,
+        isValidForUpperLetters,
+        isValidForSpecialCharacter,
+        isValidForNumber,
+      ].filter(Boolean).length
+    ); // password complexity estimation based on validation
 
     if (e.target.value === "") {
       setScoreСomplexityPassword(0);
@@ -67,7 +77,7 @@ const SignUpForm = ({ handleSubmit, ...props }) => {
   };
 
   const classes = useStyles();
-
+  // hook accepting properties to be used for "interpolation" in the stylesheet.
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -171,22 +181,23 @@ const SignUpForm = ({ handleSubmit, ...props }) => {
       </div>
     </Container>
   );
-};
+}; // Form for login
 
 const SignUp = (props) => {
   const onSubmit = (formData) => {
     console.log(formData);
-  };
+  }; // Function that outputs data from the form to the console
   return (
     <>
-      <SignUpReduxForm onSubmit={onSubmit} props={props}/>
+      <SignUpReduxForm onSubmit={onSubmit} props={props} />
     </>
   );
-};
+}; //The main component of LogIn which returns SignUpReduxForm
 
 const SignUpReduxForm = reduxForm({
-  form: "singUp",
-  validate,
-})(SignUpForm);
+  form: "singUp", // a unique name for the form
+  validate, //  validation function given to redux-form
+})(SignUpForm); //HOC
+//function that takes configuration object and returns a new function;
 
 export default SignUp;

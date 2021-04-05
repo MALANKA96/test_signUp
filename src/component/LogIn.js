@@ -18,7 +18,9 @@ import useStyles from "../style/useStyle";
 
 const LogInForm = ({ handleSubmit, ...props }) => {
   const [typeFieldPassword, setTypeFieldPassword] = React.useState("password");
+  // hook state type setting for password
   const [visibilityPassword, setVisibilityPassword] = React.useState(false);
+  //hook state setting eye visibility for password
 
   const VisibilityPassword = () => {
     if (typeFieldPassword === "password") {
@@ -31,7 +33,7 @@ const LogInForm = ({ handleSubmit, ...props }) => {
   };
 
   const classes = useStyles();
-
+  // hook accepting properties to be used for "interpolation" in the stylesheet
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -105,22 +107,23 @@ const LogInForm = ({ handleSubmit, ...props }) => {
       </div>
     </Container>
   );
-};
+}; // Form for login
 
 const LogIn = (props) => {
   const onSubmit = (formData) => {
     console.log(formData);
-  };
+  }; // Function that outputs data from the form to the console
   return (
     <>
       <LogInReduxForm onSubmit={onSubmit} props={props} />
     </>
   );
-};
+}; //The main component of LogIn which returns LogInReduxForm
 
 const LogInReduxForm = reduxForm({
-  form: "singIp",
-  validate,
-})(LogInForm);
+  form: "logIn", // a unique name for the form
+  validate, //  validation function given to redux-form
+})(LogInForm); //HOC
+//function that takes configuration object and returns a new function;
 
 export default LogIn;
