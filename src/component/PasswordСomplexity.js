@@ -1,10 +1,10 @@
 import React from "react";
 
-const PassStrong = ({ scoreStrongPass }) => {
+const PasswordСomplexity = ({ scoreСomplexityPassword }) => {
   let strColor;
   let strWidth;
 
-  switch (scoreStrongPass) {
+  switch (scoreСomplexityPassword) {
     case 1:
       strColor = "red";
       strWidth = "25%";
@@ -24,7 +24,7 @@ const PassStrong = ({ scoreStrongPass }) => {
     default:
   }
 
-  let style = {
+  const styleСomplexityPassword = {
     backgroundColor: strColor,
     height: "5px",
     marginTop: "10px",
@@ -32,7 +32,7 @@ const PassStrong = ({ scoreStrongPass }) => {
     transition: "all 300ms ease-in-out",
   };
 
-  return <div style={style}> </div>;
+  return <div style={styleСomplexityPassword}> </div>;
 };
 
-export default PassStrong;
+export default PasswordСomplexity;
