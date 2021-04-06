@@ -1,6 +1,15 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
+  main: {
+    display: "flex",
+    /* backgroundColor: ( "yellowgreen" ), */
+    width: "100vw",
+    height: "100vh",
+    margin: "0",
+    maxWidth: "100vw"
+
+  },
   paper: {
     marginTop: theme.spacing(8),
     display: "flex",
@@ -15,14 +24,17 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     marginTop: theme.spacing(10),
     margin: "0 auto",
-  }, 
+  },
+  buttonNigthTheme: {
+    marginTop: theme.spacing(10),
+  },
   buttonLogIn: {
+    marginTop: theme.spacing(3),
     width: "100%",
-   /*  marginRigth: theme.spacing(3), */
-  }, 
+  },
   buttonSignUp: {
     width: "100%",
-   marginTop: theme.spacing(3),
+    marginTop: theme.spacing(3),
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
@@ -45,6 +57,4 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 export default useStyles;
-

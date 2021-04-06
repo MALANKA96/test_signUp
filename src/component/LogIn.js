@@ -35,7 +35,7 @@ const LogInForm = ({ handleSubmit, ...props }) => {
   const classes = useStyles();
   // hook accepting properties to be used for "interpolation" in the stylesheet
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main"  maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
         <Typography component="h1" variant="h5">
