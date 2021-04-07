@@ -1,19 +1,21 @@
 import * as React from "react";
 import { Field, reduxForm } from "redux-form";
 
-import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Link from "@material-ui/core/Link";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-import Container from "@material-ui/core/Container";
-import VisibilityIcon from "@material-ui/icons/Visibility";
-import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
+import {
+  Button,
+  Container,
+  Grid,
+  Link,
+  Typography,
+  CssBaseline,
+} from "@material-ui/core";
 
-import PasswordСomplexity from "./PasswordСomplexity";
-import InputTextField from "./InputTextField";
-import validate from "../validators/validatorsSignUp";
-import useStyles from "../style/useStyle";
+import { Visibility, VisibilityOff } from "@material-ui/icons";
+
+import { PasswordСomplexity } from "./PasswordСomplexity";
+import { InputTextField } from "./InputTextField";
+import { validate } from "../validators/validatorsSignUp";
+import { useStyles } from "../style/useStyle";
 
 const SignUpForm = ({ handleSubmit, ...props }) => {
   const [typeFieldPassword, setTypeFieldPassword] = React.useState("password");
@@ -129,8 +131,7 @@ const SignUpForm = ({ handleSubmit, ...props }) => {
                 className={classes.buttonPass}
                 onClick={VisibilityPassword}
               >
-                {visibilityPassword && <VisibilityIcon />}
-                {!visibilityPassword && <VisibilityOffIcon />}
+                {visibilityPassword ? <Visibility /> : <VisibilityOff />}
               </Button>
             </Grid>
             {visibilityСomplexityPassword && (
@@ -183,7 +184,7 @@ const SignUpForm = ({ handleSubmit, ...props }) => {
   );
 }; // Form for login
 
-const SignUp = (props) => {
+export const SignUp = (props) => {
   const onSubmit = (formData) => {
     console.log(formData);
   }; // Function that outputs data from the form to the console
@@ -199,5 +200,3 @@ const SignUpReduxForm = reduxForm({
   validate, //  validation function given to redux-form
 })(SignUpForm); //HOC
 //function that takes configuration object and returns a new function;
-
-export default SignUp;

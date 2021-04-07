@@ -1,6 +1,4 @@
-import React from "react";
-
-const PasswordСomplexity = ({ scoreСomplexityPassword }) => {
+export const PasswordСomplexity = ({ scoreСomplexityPassword }) => {
   //component that returns the password complexity slider
   let strColor; 
   let strWidth;
@@ -36,4 +34,3 @@ const PasswordСomplexity = ({ scoreСomplexityPassword }) => {
   return <div style={styleСomplexityPassword}> </div>;
 };
 
-export default PasswordСomplexity;

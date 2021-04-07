@@ -1,10 +1,9 @@
-import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./App";
-import store from "./store/store";
+import { App } from "./App";
+import { store } from "./store/store";
 
-let rerender = () => {
+const rerender = () => {
   ReactDOM.render(<App />, document.getElementById("root"));
 };
 

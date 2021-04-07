@@ -1,21 +1,24 @@
 import * as React from "react";
-import SignUp from "./component/SignUp";
-import LogIn from "./component/LogIn";
+import { SignUp } from "./component/SignUp";
+import { LogIn } from "./component/LogIn";
 
 import { Provider } from "react-redux";
-import store from "./store/store";
-import Button from "@material-ui/core/Button";
-import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
-import useStyles from "./style/useStyle";
-import Dialog from "@material-ui/core/Dialog";
-
-import Brightness7Icon from "@material-ui/icons/Brightness7";
-import Brightness4Icon from "@material-ui/icons/Brightness4";
-import { createMuiTheme, Paper, ThemeProvider } from "@material-ui/core";
+import { store } from "./store/store";
+import {
+  Button,
+  Container,
+  Grid,
+  Dialog,
+  createMuiTheme,
+  Paper,
+  ThemeProvider,
+} from "@material-ui/core";
+import { Brightness7, Brightness4 } from "@material-ui/icons";
 import { green, indigo } from "@material-ui/core/colors";
 
-const App = () => {
+import { useStyles } from "./style/useStyle";
+
+export const App = () => {
   const [openSignUp, setOpenSignUp] = React.useState(false);
   //hook state opening Dialog Sign up
   const [openLogIn, setOpenLogIn] = React.useState(false);
@@ -37,11 +40,7 @@ const App = () => {
   };
 
   const handleNightTheme = () => {
-    if (nightTheme === false) {
-      setNightTheme(true);
-    } else {
-      setNightTheme(false);
-    }
+    nightTheme ? setNightTheme(false) : setNightTheme(true);
   };
 
   const myThemeNigth = createMuiTheme({
@@ -68,8 +67,7 @@ const App = () => {
                 className={classes.buttonNigthTheme}
                 onClick={handleNightTheme}
               >
-                {nightTheme && <Brightness7Icon />}
-                {!nightTheme && <Brightness4Icon />}
+                {nightTheme ? <Brightness7 /> : <Brightness4 />}
               </Button>
               <Button
                 type="button"
@@ -108,10 +106,9 @@ const App = () => {
 
 function SignUpDialog(props) {
   //modal window on the form Sign up
-
-  const { onClose, selectedValue, open } = props;
+  const { onClose, open } = props;
   const handleClose = () => {
-    onClose(selectedValue);
+    onClose();
   };
 
   return (
@@ -123,9 +120,9 @@ function SignUpDialog(props) {
 
 function LogInDialog(props) {
   //modal window on the form Log in
-  const { onClose, selectedValue, open } = props;
+  const { onClose, open } = props;
   const handleClose = () => {
-    onClose(selectedValue);
+    onClose();
   };
 
   return (
@@ -134,5 +131,3 @@ function LogInDialog(props) {
     </Dialog>
   );
 }
-
-export default App;

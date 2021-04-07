@@ -1,20 +1,22 @@
 import * as React from "react";
 import { Field, reduxForm } from "redux-form";
 
-import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Link from "@material-ui/core/Link";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-import Container from "@material-ui/core/Container";
-import VisibilityIcon from "@material-ui/icons/Visibility";
-import VisibilityOffIcon from "@material-ui/icons/VisibilityOff";
+import {
+  Button,
+  Container,
+  Grid,
+  Link,
+  Typography,
+  CssBaseline,
+} from "@material-ui/core";
 
-import InputTextField from "./InputTextField";
-import CheckboxField from "./CheckboxField";
+import { Visibility, VisibilityOff } from "@material-ui/icons";
 
-import validate from "../validators/validatorsLogIn";
-import useStyles from "../style/useStyle";
+import { InputTextField } from "./InputTextField";
+import { CheckboxField } from "./CheckboxField";
+
+import { validate } from "../validators/validatorsLogIn";
+import { useStyles } from "../style/useStyle";
 
 const LogInForm = ({ handleSubmit, ...props }) => {
   const [typeFieldPassword, setTypeFieldPassword] = React.useState("password");
@@ -35,7 +37,7 @@ const LogInForm = ({ handleSubmit, ...props }) => {
   const classes = useStyles();
   // hook accepting properties to be used for "interpolation" in the stylesheet
   return (
-    <Container component="main"  maxWidth="xs">
+    <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
         <Typography component="h1" variant="h5">
@@ -54,7 +56,6 @@ const LogInForm = ({ handleSubmit, ...props }) => {
                 title={"enter your email"}
               />
             </Grid>
-
             <Grid item xs={10} sm={10}>
               <Field
                 placeholder={"password"}
@@ -74,8 +75,7 @@ const LogInForm = ({ handleSubmit, ...props }) => {
                 className={classes.buttonPass}
                 onClick={VisibilityPassword}
               >
-                {visibilityPassword && <VisibilityIcon />}
-                {!visibilityPassword && <VisibilityOffIcon />}
+                {visibilityPassword ? <Visibility /> : <VisibilityOff />}
               </Button>
             </Grid>
             <Field
@@ -109,7 +109,7 @@ const LogInForm = ({ handleSubmit, ...props }) => {
   );
 }; // Form for login
 
-const LogIn = (props) => {
+export const LogIn = (props) => {
   const onSubmit = (formData) => {
     console.log(formData);
   }; // Function that outputs data from the form to the console
@@ -125,5 +125,3 @@ const LogInReduxForm = reduxForm({
   validate, //  validation function given to redux-form
 })(LogInForm); //HOC
 //function that takes configuration object and returns a new function;
-
-export default LogIn;

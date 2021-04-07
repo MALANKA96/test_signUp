@@ -1,6 +1,6 @@
 import {TextField} from "@material-ui/core";
 
-const InputTextField = ({ input, meta, ...props }) => {
+export const InputTextField = ({ input, meta, ...props }) => {
   //a component that returns an input field
   const hasError = meta.touched && meta.error;
   return (
@@ -17,4 +17,3 @@ const InputTextField = ({ input, meta, ...props }) => {
   );
 };
 
-export default InputTextField;

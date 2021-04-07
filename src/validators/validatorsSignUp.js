@@ -1,4 +1,4 @@
-const validate = (values) => {
+export const validate = (values) => {
   const errors = {};
   validationLogin(values, errors);
   validationEmail(values, errors);
@@ -105,4 +105,4 @@ const validationConfirmPassword = (values, errors) => {
   }
 };
 
-export default validate;
+
