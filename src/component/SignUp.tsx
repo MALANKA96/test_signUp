@@ -1,4 +1,4 @@
-import * as React from "react";
+import { FC, useState } from "react";
 import { Field, reduxForm } from "redux-form";
 
 import {
@@ -17,17 +17,17 @@ import { InputTextField } from "./InputTextField";
 import { validate } from "../validators/validatorsSignUp";
 import { useStyles } from "../style/useStyle";
 
-const SignUpForm = ({ handleSubmit, ...props }) => {
-  const [typeFieldPassword, setTypeFieldPassword] = React.useState("password");
+const SignUpForm:FC = (props: any) => {
+  const [typeFieldPassword, setTypeFieldPassword] = useState<string>("password");
   // hook state type setting for password
-  const [visibilityPassword, setVisibilityPassword] = React.useState(false);
+  const [visibilityPassword, setVisibilityPassword] = useState<boolean>(false);
   //hook state setting eye visibility for password
   const [
     visibilityСomplexityPassword,
     setVisibilityСomplexityPassword,
-  ] = React.useState(false);
+  ] = useState<boolean>(false);
   //hook visibility slider for password сomplexity
-  let [scoreСomplexityPassword, setScoreСomplexityPassword] = React.useState(0);
+  let [scoreСomplexityPassword, setScoreСomplexityPassword] = useState<number>(0);
   //hook state to change points(score) for password complexity
 
   const validationForLowerLetters = /(?=.*[a-z])/;
@@ -35,21 +35,21 @@ const SignUpForm = ({ handleSubmit, ...props }) => {
   const validationForSpecialCharacter = /(?=.*[!@#$%^&*()_=+{}:<.>-])/;
   const validationForNumber = /(?=.*[0-9])/;
 
-  const onPasswordСomplexity = (e) => {
+  const onPasswordСomplexity = (e: { target: { value: string; }; }) => {
     //examining the password complexity state
     setVisibilityСomplexityPassword(true);
     let arrayValuePassword = e.target.value.split("");
     //entering the password value into an array for verification
-    let isValidForLowerLetters = arrayValuePassword.some((i) => {
+    let isValidForLowerLetters = arrayValuePassword.some((i: string) => {
       return validationForLowerLetters.test(i);
     });
-    let isValidForUpperLetters = arrayValuePassword.some((i) => {
+    let isValidForUpperLetters = arrayValuePassword.some((i: string) => {
       return validationForUpperLetters.test(i);
     });
-    let isValidForSpecialCharacter = arrayValuePassword.some((i) => {
+    let isValidForSpecialCharacter = arrayValuePassword.some((i: string) => {
       return validationForSpecialCharacter.test(i);
     });
-    let isValidForNumber = arrayValuePassword.some((i) => {
+    let isValidForNumber = arrayValuePassword.some((i: string) => {
       return validationForNumber.test(i);
     });
 
@@ -87,7 +87,7 @@ const SignUpForm = ({ handleSubmit, ...props }) => {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <form className={classes.form} noValidate onSubmit={handleSubmit}>
+        <form className={classes.form} noValidate onSubmit={props.handleSubmit}>
           <Grid container spacing={1}>
             <Grid item xs={12}>
               <Field
@@ -173,7 +173,7 @@ const SignUpForm = ({ handleSubmit, ...props }) => {
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link onClick={props.props.handleClickOpenLogIn} variant="body2">
+              <Link onClick={props.handleClickOpenLogIn} variant="body2">
                 Already have an account? Log in
               </Link>
             </Grid>
@@ -184,13 +184,14 @@ const SignUpForm = ({ handleSubmit, ...props }) => {
   );
 }; // Form for login
 
-export const SignUp = (props) => {
-  const onSubmit = (formData) => {
+export const SignUp = (props: any) => {
+  debugger
+  const onSubmit = (formData: any) => {
     console.log(formData);
   }; // Function that outputs data from the form to the console
   return (
     <>
-      <SignUpReduxForm onSubmit={onSubmit} props={props} />
+      <SignUpReduxForm onSubmit={onSubmit} {...props} />
     </>
   );
 }; //The main component of LogIn which returns SignUpReduxForm

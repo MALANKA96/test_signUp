@@ -1,4 +1,5 @@
-import * as React from "react";
+import { FC, useState } from "react";
+
 import { SignUp } from "./component/SignUp";
 import { LogIn } from "./component/LogIn";
 
@@ -18,28 +19,29 @@ import { green, indigo } from "@material-ui/core/colors";
 
 import { useStyles } from "./style/useStyle";
 
-export const App = () => {
-  const [openSignUp, setOpenSignUp] = React.useState(false);
+
+export const App:FC = () => {
+  const [openSignUp, setOpenSignUp] = useState<boolean>(false);
   //hook state opening Dialog Sign up
-  const [openLogIn, setOpenLogIn] = React.useState(false);
+  const [openLogIn, setOpenLogIn] = useState<boolean>(false);
   //hook state opening Dialog Log in
-  const [nightTheme, setNightTheme] = React.useState(true);
+  const [nightTheme, setNightTheme] = useState<boolean>(true);
   //hook state night mode
-  const handleClickOpenSignUp = () => {
+  const handleClickOpenSignUp = ():void => {
     setOpenLogIn(false);
     setOpenSignUp(true);
   };
-  const handleClickOpenLogIn = () => {
+  const handleClickOpenLogIn = ():void => {
     setOpenLogIn(true);
     setOpenSignUp(false);
   };
 
-  const handleClose = () => {
+  const handleClose = ():void => {
     setOpenSignUp(false);
     setOpenLogIn(false);
   };
 
-  const handleNightTheme = () => {
+  const handleNightTheme = ():void => {
     nightTheme ? setNightTheme(false) : setNightTheme(true);
   };
 
@@ -104,10 +106,10 @@ export const App = () => {
   );
 };
 
-function SignUpDialog(props) {
+function SignUpDialog(props: any) {
   //modal window on the form Sign up
   const { onClose, open } = props;
-  const handleClose = () => {
+  const handleClose = ():void => {
     onClose();
   };
 
@@ -118,10 +120,10 @@ function SignUpDialog(props) {
   );
 }
 
-function LogInDialog(props) {
+function LogInDialog(props : any) {
   //modal window on the form Log in
   const { onClose, open } = props;
-  const handleClose = () => {
+  const handleClose = ():void => {
     onClose();
   };
 
